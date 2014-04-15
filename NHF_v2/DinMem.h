@@ -25,7 +25,6 @@ public:
 	void		operator+=(Request*);
 	void		operator-=(Request*);
 	void		status();
-	//DESTRUKTOR NINCS MEG KESZ
 	~DinMen();
 };
 

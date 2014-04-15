@@ -42,10 +42,23 @@ void DinMen::operator-=(Request* request)
 	if (match)
 	{
 		DM_List* movingPtr = begin;
+		DM_List* oneStepBehind = begin;
+
 		while (movingPtr->req != request)
 		{
 			movingPtr = movingPtr->next;
 		}
+		while (oneStepBehind->next != movingPtr)
+		{
+			oneStepBehind = oneStepBehind->next;
+		}
+		
+		oneStepBehind->next = movingPtr->next;
+		
+		remainingSize += movingPtr->req->getSize();
+		delete movingPtr;
+
+
 	}
 	else
 	{
