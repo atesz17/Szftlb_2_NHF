@@ -1,9 +1,8 @@
-﻿Build started 2014.04.15. 12:49:20.
+﻿Build started 2014.04.15. 13:12:24.
      1>Project "D:\BME\Szoftlab_II\NHF_git\Szftlb_2_NHF\NHF_v2\NHF_v2.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         D:\Programfájlok (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt DinMen.cpp
-         DinMen.cpp
-     1>d:\bme\szoftlab_ii\nhf_git\szftlb_2_nhf\nhf_v2\dinmen.cpp(19): warning C4018: '>' : signed/unsigned mismatch
+         D:\Programfájlok (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Source.cpp
+         Source.cpp
        Link:
          D:\Programfájlok (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\BME\Szoftlab_II\NHF_git\Szftlb_2_NHF\Debug\NHF_v2.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\BME\Szoftlab_II\NHF_git\Szftlb_2_NHF\Debug\NHF_v2.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\BME\Szoftlab_II\NHF_git\Szftlb_2_NHF\Debug\NHF_v2.lib" /MACHINE:X86 Debug\DinMen.obj
          Debug\Source.obj
@@ -12,4 +11,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.05
+Time Elapsed 00:00:00.99

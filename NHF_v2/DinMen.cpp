@@ -30,13 +30,36 @@ void DinMen::operator+=(Request* request)
 	remainingSize -= newEntity->req->getSize();
 }
 
+void DinMen::operator-=(Request* request)
+{
+	bool match = false;
+
+	for (DM_List* movingPtr = begin; movingPtr->next != NULL; movingPtr = movingPtr->next)
+	{
+		if (movingPtr->req == request)
+			match = true;
+	}
+	if (match)
+	{
+		DM_List* movingPtr = begin;
+		while (movingPtr->req != request)
+		{
+			movingPtr = movingPtr->next;
+		}
+	}
+	else
+	{
+		throw std::out_of_range("***********************************************\n\nERROR_DinMen: Request is not in DinMen!\n\n***********************************************");
+	}
+}
+
 void DinMen::status()
 {
 	std::cout << std::endl << std::endl;
 	std::cout << "============================================\n\n";
 	std::cout << "DinMen STATUS:" << std::endl << std::endl;
 	
-	std::cout << "Tolal size: " << totalSize << std::endl;
+	std::cout << "Total size: " << totalSize << std::endl;
 	std::cout << "Remaining size: " << remainingSize << std::endl;
 
 	std::cout << "\n============================================\n\n";
@@ -44,5 +67,11 @@ void DinMen::status()
 
 DinMen::~DinMen()
 {
-
+	while (begin->next != NULL)
+	{
+		DM_List* tmp = begin->next;
+		delete begin;
+		begin = tmp;
+	}
+	delete begin;
 }
