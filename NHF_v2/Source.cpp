@@ -38,6 +38,9 @@ int main()
 	{
 		DinMen d1(10);
 		d1.status();
+		Request r1(3);
+		d1 += (&r1);
+		d1.status();
 	}
 	catch (const std::out_of_range& e)
 	{

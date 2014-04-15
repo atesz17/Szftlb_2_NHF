@@ -10,7 +10,7 @@ DinMen::DinMen(int requestedSize)
 	totalSize = requestedSize;
 	remainingSize = requestedSize;
 	begin = new DM_List();
-	end = new DM_List();
+	end = NULL;
 	begin->next = end;
 }
 
@@ -26,13 +26,15 @@ void DinMen::operator+=(Request* request)
 
 	movingPtr->next = newEntity;
 	newEntity->next = end;
+
+	remainingSize -= newEntity->req->getSize();
 }
 
 void DinMen::status()
 {
 	std::cout << std::endl << std::endl;
 	std::cout << "============================================\n\n";
-	std::cout << "DinMen STATUS:" << std::endl;
+	std::cout << "DinMen STATUS:" << std::endl << std::endl;
 	
 	std::cout << "Tolal size: " << totalSize << std::endl;
 	std::cout << "Remaining size: " << remainingSize << std::endl;
