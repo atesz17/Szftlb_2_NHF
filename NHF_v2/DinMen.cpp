@@ -69,13 +69,13 @@ void DinMen::operator-=(Request* request)
 void DinMen::status()
 {
 	std::cout << std::endl << std::endl;
-	std::cout << "============================================\n\n";
+	std::cout << "============================================\n";
 	std::cout << "DinMen STATUS:" << std::endl << std::endl;
 	
 	std::cout << "Total size: " << totalSize << std::endl;
 	std::cout << "Remaining size: " << remainingSize << std::endl;
 
-	std::cout << "\n============================================\n\n";
+	std::cout << "============================================\n\n";
 }
 
 DinMen::~DinMen()

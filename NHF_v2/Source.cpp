@@ -48,6 +48,11 @@ int main()
 		Request* r3 = new Request(2);
 		std::cout << r3 << std::endl;
 
+		Request a(2);
+		std::cout << &a;
+
+		d1 += &a;
+
 		d1 += r1;
 		d1.status();
 		d1 -= r1;
