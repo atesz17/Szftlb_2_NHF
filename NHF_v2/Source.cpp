@@ -2,6 +2,7 @@
 #include "DinMem.h"
 
 #include <iostream>
+#include <vld.h>
 
 #define REQUEST_BASIC 0
 #define REQUEST_EXCEPTION 0
@@ -44,6 +45,7 @@ int main()
 		d1.status();
 		d1 -= r1;
 		d1.status();
+		delete r1;
 	}
 	catch (const std::out_of_range& e)
 	{
