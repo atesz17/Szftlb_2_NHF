@@ -34,7 +34,7 @@ void DinMen::operator-=(Request* request)
 {
 	bool match = false;
 
-	for (DM_List* movingPtr = begin; movingPtr->next != NULL; movingPtr = movingPtr->next)
+	for (DM_List* movingPtr = begin; movingPtr != NULL; movingPtr = movingPtr->next)
 	{
 		if (movingPtr->req == request)
 			match = true;

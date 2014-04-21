@@ -39,6 +39,7 @@ int main()
 		DinMen d1(10);
 		d1.status();
 		Request* r1 = new Request(3);
+		std::cout << r1;
 		d1 += r1;
 		d1.status();
 		d1 -= r1;
