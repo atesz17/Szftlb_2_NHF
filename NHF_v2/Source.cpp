@@ -39,13 +39,28 @@ int main()
 	{
 		DinMen d1(10);
 		d1.status();
+
+		//Requestek
 		Request* r1 = new Request(3);
-		std::cout << r1;
+		std::cout << r1 << std::endl;
+		Request* r2 = new Request(3);
+		std::cout << r2 << std::endl;
+		Request* r3 = new Request(2);
+		std::cout << r3 << std::endl;
+
 		d1 += r1;
 		d1.status();
 		d1 -= r1;
 		d1.status();
+		d1 += r1;
+		d1 += r2;
+		d1 += r3;
+		d1.status();
+
+		//Requestek felszabaditasa
 		delete r1;
+		delete r2;
+		delete r3;
 	}
 	catch (const std::out_of_range& e)
 	{
