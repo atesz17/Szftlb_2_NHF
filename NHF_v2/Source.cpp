@@ -2,11 +2,12 @@
 #include "DinMem.h"
 
 #include <iostream>
-#include <vld.h>
+//#include <vld.h>
 
 #define REQUEST_BASIC 0
 #define REQUEST_EXCEPTION 0
-#define DINMEN_BASIC 1
+#define DINMEN_BASIC 0
+#define DINMEN_OBJ 1
 
 int main()
 {
@@ -66,6 +67,28 @@ int main()
 		delete r1;
 		delete r2;
 		delete r3;
+	}
+	catch (const std::out_of_range& e)
+	{
+		std::cout << std::endl << e.what() << std::endl << std::endl;
+	}
+#elif DINMEN_OBJ
+	try
+	{
+		DinMen d(15);
+		Request r1(3);
+		Request* ptr = &r1;
+
+		d += &r1;
+		d.status();
+		d -= &r1;
+		d.status();
+		d += &r1;
+		d.status();
+		d += &r1;
+		d.status();
+		d += ptr;
+		d.status();
 	}
 	catch (const std::out_of_range& e)
 	{
