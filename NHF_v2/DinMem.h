@@ -44,7 +44,7 @@ public:
 		DM_List* p;
 	public:
 		iterator() : p(NULL) {}
-		iterator(DinMen& d) : p(d.start) {}
+		iterator(DinMen& d) : p(d.start->next) {}
 
 		iterator& operator++();
 		bool operator!=(const iterator& i);

@@ -75,7 +75,14 @@ void DinMen::status()
 	std::cout << "Total size: " << totalSize << std::endl;
 	std::cout << "Remaining size: " << remainingSize << std::endl;
 
-	std::cout << "============================================\n\n";
+
+	for (DinMen::iterator it = DinMen::begin(); it != DinMen::end(); ++it)
+	{
+		std::cout << std::endl;
+		std::cout << it->req;
+	}
+
+	std::cout << "\n\n============================================\n\n";
 }
 
 DinMen::~DinMen()
