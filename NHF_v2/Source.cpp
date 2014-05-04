@@ -9,7 +9,7 @@
 #define DINMEN_OBJ 0
 #define ITERATOR 1
 
-int main()
+int main(int argc, char** argv)
 {
 #if REQUEST_BASIC
 	try
@@ -102,6 +102,7 @@ int main()
 		Request r1(3);
 		Request r2(5);
 		Request r3(7);
+		Request r4(atoi(argv[1]));
 
 		d += &r1;
 		d.status();
@@ -115,6 +116,9 @@ int main()
 		d -= &r1;
 		d -= &r2;
 		d -= &r3;
+
+		d += &r4;
+
 		d.status();
 	}
 	catch (const std::out_of_range& e)
