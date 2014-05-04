@@ -2,7 +2,7 @@
 #include "DinMem.h"
 
 #include <iostream>
-//#include <vld.h>
+#include <vld.h>
 
 #define REQUEST_BASIC 0
 #define REQUEST_EXCEPTION 0

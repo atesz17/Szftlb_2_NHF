@@ -9,9 +9,9 @@ DinMen::DinMen(int requestedSize)
 	
 	totalSize = requestedSize;
 	remainingSize = requestedSize;
-	begin = new DM_List();
-	end = NULL;
-	begin->next = end;
+	start = new DM_List();
+	finish = NULL;
+	start->next = finish;
 }
 
 void DinMen::operator+=(Request* request)
@@ -19,13 +19,13 @@ void DinMen::operator+=(Request* request)
 	if (request->getSize() > remainingSize)
 		throw std::out_of_range("***********************************************\n\nERROR_DinMen: Requested entity's size is greater than DinMen total size!\n\n***********************************************");
 	
-	DM_List* movingPtr = begin;
+	DM_List* movingPtr = start;
 	DM_List* newEntity = new DM_List(request);
 
 	while (movingPtr->next != NULL) { movingPtr = movingPtr->next; }
 
 	movingPtr->next = newEntity;
-	newEntity->next = end;
+	newEntity->next = finish;
 
 	remainingSize -= newEntity->req->getSize();
 }
@@ -34,15 +34,15 @@ void DinMen::operator-=(Request* request)
 {
 	bool match = false;
 
-	for (DM_List* movingPtr = begin; movingPtr != NULL; movingPtr = movingPtr->next)
+	for (DM_List* movingPtr = start; movingPtr != NULL; movingPtr = movingPtr->next)
 	{
 		if (movingPtr->req == request)
 			match = true;
 	}
 	if (match)
 	{
-		DM_List* movingPtr = begin;
-		DM_List* oneStepBehind = begin;
+		DM_List* movingPtr = start;
+		DM_List* oneStepBehind = start;
 
 		while (movingPtr->req != request)
 		{
@@ -80,11 +80,37 @@ void DinMen::status()
 
 DinMen::~DinMen()
 {
-	while (begin->next != NULL)
+	while (start->next != NULL)
 	{
-		DM_List* tmp = begin->next;
-		delete begin;
-		begin = tmp;
+		DM_List* tmp = start->next;
+		delete start;
+		start = tmp;
 	}
-	delete begin;
+	delete start;
+}
+
+DinMen::iterator& DinMen::iterator::operator++()
+{
+	if (p != NULL)
+		p = p->next;
+	return *this;
+}
+
+bool DinMen::iterator::operator!=(const iterator& i)
+{
+	return (p != i.p);
+}
+
+DinMen::DM_List& DinMen::iterator::operator*()
+{
+	if (p != NULL)
+		return *p;
+	throw std::runtime_error("Hibas indirekcio (*)");
+}
+
+DinMen::DM_List* DinMen::iterator::operator->()
+{
+	if (p != NULL)
+		return p;
+	throw std::runtime_error("Hibas indirekcio (->)");
 }
