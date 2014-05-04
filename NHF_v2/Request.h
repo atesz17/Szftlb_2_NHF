@@ -13,7 +13,7 @@ public:
 			throw std::out_of_range("***********************************************\n\nERROR_Request: Request size cannot be zero or less!\n\n***********************************************");
 		size = s;
 	}
-	int getSize() { return size; }
+	size_t getSize() { return size; }
 };
 
 #endif
