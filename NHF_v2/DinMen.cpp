@@ -22,7 +22,7 @@ void DinMen::operator+=(Request* request)
 	DM_List* movingPtr = start;
 	DM_List* newEntity = new DM_List(request);
 
-	while (movingPtr->next != NULL) { movingPtr = movingPtr->next; }
+	while (movingPtr->next != finish) { movingPtr = movingPtr->next; }
 
 	movingPtr->next = newEntity;
 	newEntity->next = finish;
@@ -34,7 +34,7 @@ void DinMen::operator-=(Request* request)
 {
 	bool match = false;
 
-	for (DM_List* movingPtr = start; movingPtr != NULL; movingPtr = movingPtr->next)
+	for (DM_List* movingPtr = start; movingPtr != finish; movingPtr = movingPtr->next)
 	{
 		if (movingPtr->req == request)
 			match = true;
@@ -57,8 +57,6 @@ void DinMen::operator-=(Request* request)
 		
 		remainingSize += movingPtr->req->getSize();
 		delete movingPtr;
-
-
 	}
 	else
 	{
@@ -87,7 +85,7 @@ void DinMen::status()
 
 DinMen::~DinMen()
 {
-	while (start->next != NULL)
+	while (start->next != finish)
 	{
 		DM_List* tmp = start->next;
 		delete start;
@@ -103,7 +101,7 @@ DinMen::iterator& DinMen::iterator::operator++()
 	return *this;
 }
 
-bool DinMen::iterator::operator!=(const iterator& i)
+bool DinMen::iterator::operator!=(const iterator& i) const
 {
 	return (p != i.p);
 }

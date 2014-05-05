@@ -31,7 +31,7 @@ public:
 	void		status();
 	~DinMen();
 
-	iterator begin()	{
+	iterator begin() {
 		return iterator(*this);
 	}
 
@@ -47,7 +47,7 @@ public:
 		iterator(DinMen& d) : p(d.start->next) {}
 
 		iterator& operator++();
-		bool operator!=(const iterator& i);
+		bool operator!=(const iterator& i) const;
 		DM_List& operator*();
 		DM_List* operator->();
 	};
