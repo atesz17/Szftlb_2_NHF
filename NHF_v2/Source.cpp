@@ -3,8 +3,8 @@
 
 #include <iostream>
 
-#define REQUEST_BASIC 1
-#define REQUEST_EXCEPTION 0
+#define REQUEST_BASIC 0
+#define REQUEST_EXCEPTION 1
 #define DINMEN_BASIC 0
 #define DINMEN_OBJ 0
 #define ITERATOR 0
@@ -35,20 +35,22 @@ int main(int argc, char** argv)
 		std::cout << ptr << std::endl << std::endl;
 		
 		// CPORTA
+		/*
 		std::cout << "CPORTA parameter:" << std::endl << std::endl;
-		int CPORTA = atoi(argv[1]);
-		std::cout << "Elso parameter: " << CPORTA << std::endl;
-		Request rCPORTA(CPORTA);
+		int cporta = atoi(argv[1]);
+		std::cout << "Elso parameter: " << cporta << std::endl;
+		Request rCPORTA(cporta);
 		std::cout << rCPORTA;
 		std::cout << std::endl;
+		*/
+	}
+#elif REQUEST_EXCEPTION
+	try
+	{
 	}
 	catch (const std::out_of_range& e)
 	{
 		std::cout << std::endl << e.what() << std::endl << std::endl;
 	}
-	catch (const std::runtime_error& e)
-	{
-		std::cout << std::endl << e.what() << std::endl << std::endl;
-	}	
 #endif
 }
