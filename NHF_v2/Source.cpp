@@ -3,123 +3,44 @@
 
 #include <iostream>
 
-#define REQUEST_BASIC 0
+#define REQUEST_BASIC 1
 #define REQUEST_EXCEPTION 0
 #define DINMEN_BASIC 0
 #define DINMEN_OBJ 0
-#define ITERATOR 1
+#define ITERATOR 0
+
+std::ostream& operator<<(std::ostream& os, const Request& r)
+{
+	os << "Ptr: " << &r << " merete: " << r.getSize() << std::endl;
+	return os;
+}
 
 int main(int argc, char** argv)
 {
 #if REQUEST_BASIC
 	try
 	{
-		Request r1(2);
-		Request* rPtr = &r1;
-		std::cout << r1.getSize() << std::endl;
-		std::cout << rPtr->getSize() << std::endl;
-	}
-	catch (const std::out_of_range& e)
-	{
-		std::cout << e.what();
-	}
-#elif REQUEST_EXCEPTION
-	try
-	{
-		Request r1(0);
-		Request *rPtr = &r1;
-		std::cout << r1.getSize() << std::endl;
-		std::cout << rPtr->getSize() << std::endl;
-	}
-	catch (const std::out_of_range& e)
-	{
-		std::cout << std::endl << e.what() << std::endl << std::endl;
-	}
-#elif DINMEN_BASIC
-	try
-	{
-		DinMen d1(10);
-		d1.status();
+		Request r1(1);
+		Request r2(2);
+		Request r3(9);
+		std::cout << r1 << r2 << r3;
 
-		//Requestek
-		Request* r1 = new Request(3);
-		std::cout << r1 << std::endl;
-		Request* r2 = new Request(3);
-		std::cout << r2 << std::endl;
-		Request* r3 = new Request(2);
-		std::cout << r3 << std::endl;
-
-		Request a(2);
-		std::cout << &a;
-
-		d1 += &a;
-
-		d1 += r1;
-		d1.status();
-		d1 -= r1;
-		d1.status();
-		d1 += r1;
-		d1 += r2;
-		d1 += r3;
-		d1.status();
-
-		//Requestek felszabaditasa
-		delete r1;
-		delete r2;
-		delete r3;
-	}
-	catch (const std::out_of_range& e)
-	{
-		std::cout << std::endl << e.what() << std::endl << std::endl;
-	}
-#elif DINMEN_OBJ
-	try
-	{
-		DinMen d(15);
-		Request r1(3);
+		// Ellenorzes
+		std::cout << "\nEllenorzes pointerrel:\n\n";
 		Request* ptr = &r1;
-
-		d += &r1;
-		d.status();
-		d -= &r1;
-		d.status();
-		d += &r1;
-		d.status();
-		d += &r1;
-		d.status();
-		d += ptr;
-		d.status();
-	}
-	catch (const std::out_of_range& e)
-	{
-		std::cout << std::endl << e.what() << std::endl << std::endl;
-	}
-#elif ITERATOR
-	try
-	{
-		DinMen d(15);
-
-		Request r1(3);
-		Request r2(5);
-		Request r3(7);
-		Request r4(atoi(argv[1]));
-
-		d += &r1;
-		d.status();
-
-		d += &r2;
-		d.status();
-
-		d += &r3;
-		d.status();
-
-		d -= &r1;
-		d -= &r2;
-		d -= &r3;
-
-		d += &r4;
-
-		d.status();
+		std::cout << ptr << std::endl;
+		ptr = &r2;
+		std::cout << ptr << std::endl;
+		ptr = &r3;
+		std::cout << ptr << std::endl << std::endl;
+		
+		// CPORTA
+		std::cout << "CPORTA parameter:" << std::endl << std::endl;
+		int CPORTA = atoi(argv[1]);
+		std::cout << "Elso parameter: " << CPORTA << std::endl;
+		Request rCPORTA(CPORTA);
+		std::cout << rCPORTA;
+		std::cout << std::endl;
 	}
 	catch (const std::out_of_range& e)
 	{
@@ -128,6 +49,6 @@ int main(int argc, char** argv)
 	catch (const std::runtime_error& e)
 	{
 		std::cout << std::endl << e.what() << std::endl << std::endl;
-	}
+	}	
 #endif
 }

@@ -14,6 +14,7 @@ public:
 		size = s;
 	}
 	size_t getSize() const { return size; }
+	friend std::ostream& operator<<(std::ostream& os, const Request& r);
 };
 
 #endif
