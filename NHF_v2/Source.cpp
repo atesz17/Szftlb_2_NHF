@@ -5,9 +5,10 @@
 
 #define REQUEST_BASIC 0
 #define REQUEST_EXCEPTION 0
-#define DINMEN_BASIC 1
-#define DINMEN_OBJ 0
-#define ITERATOR 0
+#define DINMEN_BASIC 0
+#define DINMEN_EXCEPTION_SIZE 0
+#define DINMEN_EXCEPTION_OPERATOR_PLUS 0
+#define DINMEN_EXCEPTION_OPERATOR_MINUS 1
 
 std::ostream& operator<<(std::ostream& os, const Request& r)
 {
@@ -69,5 +70,38 @@ int main(int argc, char** argv)
 		d -= &r2;
 		d -= &r4;
 		d.status();
+#elif DINMEN_EXCEPTION_SIZE
+	try
+	{
+		DinMen d(0);
+	}
+	catch (const std::out_of_range& e)
+	{
+		std::cout << std::endl << e.what() << std::endl << std::endl;
+	}
+#elif DINMEN_EXCEPTION_OPERATOR_PLUS
+	try
+	{
+		DinMen d(1);
+		Request rNAGY(2);
+		std::cout << rNAGY;
+		d += &rNAGY;
+	}
+	catch (const std::out_of_range& e)
+	{
+		std::cout << std::endl << e.what() << std::endl << std::endl;
+	}
+#elif DINMEN_EXCEPTION_OPERATOR_MINUS
+	try
+	{
+		DinMen d(1);
+		Request r(2);
+		std::cout << r;
+		d -= &r;
+	}
+	catch (const std::out_of_range& e)
+	{
+		std::cout << std::endl << e.what() << std::endl << std::endl;
+	}
 #endif
 }
