@@ -108,7 +108,7 @@ int main(int argc, char** argv)
 #elif ORAI_PELDA
 	try
 	{
-		
+		/*
 		DinMen d(5);
 		Request r1(1);
 		Request r2(2);
@@ -119,7 +119,6 @@ int main(int argc, char** argv)
 		d += &r2;
 		d += &r3;
 		d += &r4;
-		d.status();
 
 		d -= &r1;
 		d -= &r3;
@@ -127,7 +126,7 @@ int main(int argc, char** argv)
 		Request rhiba(2);
 		//Nem kene bemennie
 		d += &rhiba;
-		
+		*/
 
 		/*
 		DinMen d(3);
@@ -137,19 +136,16 @@ int main(int argc, char** argv)
 		d.status();
 
 		d += &r1;
-		d.status();
 		d += &r2;
 		d += &r3;
-		d.status();
 
 		d -= &r1;
 		d -= &r3;
 		Request rhiba(2);
-		d.status();
 		d += &rhiba;
 		*/
 
-		/*
+		
 		DinMen d(7);
 		d.status();
 		Request r1(1);
@@ -160,7 +156,8 @@ int main(int argc, char** argv)
 		d += &r3;
 
 		d -= &r2;
-		*/
+		Request r4(4);
+		d += &r4;
 
 	}
 	catch (const std::out_of_range& e)

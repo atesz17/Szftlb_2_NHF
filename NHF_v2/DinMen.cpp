@@ -2,6 +2,7 @@
 
 #include <iostream>
 
+
 DinMen::DinMen(int requestedSize)
 {
 	if (requestedSize < 1)
