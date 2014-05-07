@@ -2,6 +2,7 @@
 #include "DinMem.h"
 
 #include <iostream>
+#include <vld.h>
 
 #define REQUEST_BASIC 0
 #define REQUEST_EXCEPTION 0
@@ -107,7 +108,7 @@ int main(int argc, char** argv)
 #elif ORAI_PELDA
 	try
 	{
-		/*
+		
 		DinMen d(5);
 		Request r1(1);
 		Request r2(2);
@@ -126,7 +127,7 @@ int main(int argc, char** argv)
 		Request rhiba(2);
 		//Nem kene bemennie
 		d += &rhiba;
-		*/
+		
 
 		/*
 		DinMen d(3);
@@ -148,6 +149,7 @@ int main(int argc, char** argv)
 		d += &rhiba;
 		*/
 
+		/*
 		DinMen d(7);
 		d.status();
 		Request r1(1);
@@ -158,6 +160,7 @@ int main(int argc, char** argv)
 		d += &r3;
 
 		d -= &r2;
+		*/
 
 	}
 	catch (const std::out_of_range& e)

@@ -166,10 +166,10 @@ void DinMen::status()
 		}
 		else
 		{
-			for (unsigned int i = ptr->startPos + ptr->req->getSize(); i < ptr->next->startPos; i++)
-				std::cout << '0';
 			for (unsigned int z = 0; z < ptr->req->getSize(); z++)
 				std::cout << 'X';
+			for (unsigned int i = ptr->startPos + ptr->req->getSize(); i < ptr->next->startPos; i++)
+				std::cout << '0';
 		}
 		ptr = ptr->next;
 	}
