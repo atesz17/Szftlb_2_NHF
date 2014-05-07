@@ -8,7 +8,8 @@
 #define DINMEN_BASIC 0
 #define DINMEN_EXCEPTION_SIZE 0
 #define DINMEN_EXCEPTION_OPERATOR_PLUS 0
-#define DINMEN_EXCEPTION_OPERATOR_MINUS 1
+#define DINMEN_EXCEPTION_OPERATOR_MINUS 0
+#define ORAI_PELDA 1
 
 std::ostream& operator<<(std::ostream& os, const Request& r)
 {
@@ -98,6 +99,66 @@ int main(int argc, char** argv)
 		Request r(2);
 		std::cout << r;
 		d -= &r;
+	}
+	catch (const std::out_of_range& e)
+	{
+		std::cout << std::endl << e.what() << std::endl << std::endl;
+	}
+#elif ORAI_PELDA
+	try
+	{
+		/*
+		DinMen d(5);
+		Request r1(1);
+		Request r2(2);
+		Request r3(1);
+		Request r4(1);
+
+		d += &r1;
+		d += &r2;
+		d += &r3;
+		d += &r4;
+		d.status();
+
+		d -= &r1;
+		d -= &r3;
+
+		Request rhiba(2);
+		//Nem kene bemennie
+		d += &rhiba;
+		*/
+
+		/*
+		DinMen d(3);
+		Request r1(1);
+		Request r2(1);
+		Request r3(1);
+		d.status();
+
+		d += &r1;
+		d.status();
+		d += &r2;
+		d += &r3;
+		d.status();
+
+		d -= &r1;
+		d -= &r3;
+		Request rhiba(2);
+		d.status();
+		d += &rhiba;
+		*/
+
+		DinMen d(7);
+		d.status();
+		Request r1(1);
+		Request r2(3);
+		Request r3(2);
+		d += &r1;
+		d += &r2;
+		d += &r3;
+
+		d -= &r2;
+
 	}
 	catch (const std::out_of_range& e)
 	{

@@ -17,8 +17,12 @@ class DinMen
 	{
 		Request*	req;
 		DM_List*	next;
+		unsigned int startPos;
 
-		DM_List(Request* newReq = NULL) : req(newReq), next(NULL) {}
+		DM_List(Request* newReq = NULL, unsigned int start = 0) : req(newReq), next(NULL)
+		{
+			startPos = start;
+		}
 	};
 
 public:

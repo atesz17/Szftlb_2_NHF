@@ -16,9 +16,76 @@ DinMen::DinMen(int requestedSize)
 
 void DinMen::operator+=(Request* request)
 {
+	struct match
+	{
+		unsigned int startPos;
+		DM_List* prevElement;
+	};
+
+	match Match;
+	Match.prevElement = NULL;
+
+	DM_List* ptr = start;
+
 	if (request->getSize() > remainingSize)
+	{
 		throw std::out_of_range("***********************************************\n\nERROR_DinMen: Requested entity's size is greater than DinMen total size!\n\n***********************************************");
-	
+	}
+	else
+	{
+		while (ptr->next != finish)
+		{
+			// Ha a startnal vagyunk
+			if (ptr->req == NULL)
+			{
+				if ((ptr->next->startPos) >= (request->getSize()))
+				{
+					Match.startPos = (ptr->next->startPos - request->getSize());
+					Match.prevElement = ptr;
+				}
+			}
+
+			// Ha egy sima elemnel vagyunk
+			else
+			{
+				if ((ptr->next->startPos - ptr->startPos - ptr->req->getSize()) >= (request->getSize()))
+				{
+					Match.startPos = (ptr->next->startPos - ptr->startPos - ptr->req->getSize());
+					Match.prevElement = ptr;
+				}
+			}
+			ptr = ptr->next;
+		}
+		if (ptr->req == NULL)
+		{
+			Match.startPos = totalSize - request->getSize();
+			Match.prevElement = start;
+		}
+
+		// Ha nem talaltunk helyet az elemnek (mert lyukak vannak)
+		if (Match.prevElement == NULL)
+		{
+			throw std::out_of_range("***********************************************\n\nERROR_DinMen: Requested entity's size cannot fit in the memory stacks of DinMen!\n\n***********************************************");
+		}
+		else
+		{
+			ptr = start;
+
+			while (ptr != Match.prevElement)
+			{
+				ptr = ptr->next;
+			}
+
+			DM_List* newEntity = new DM_List(request, Match.startPos);
+			newEntity->next = ptr->next;
+			ptr->next = newEntity;
+			remainingSize -= newEntity->req->getSize();
+		}
+	}
+
+	status();
+
+	/*
 	DM_List* movingPtr = start;
 	DM_List* newEntity = new DM_List(request);
 
@@ -28,6 +95,7 @@ void DinMen::operator+=(Request* request)
 	newEntity->next = finish;
 
 	remainingSize -= newEntity->req->getSize();
+	*/
 }
 
 void DinMen::operator-=(Request* request)
@@ -62,6 +130,8 @@ void DinMen::operator-=(Request* request)
 	{
 		throw std::out_of_range("***********************************************\n\nERROR_DinMen: Request is not in DinMen!\n\n***********************************************");
 	}
+
+	status();
 }
 
 void DinMen::status()
@@ -79,6 +149,55 @@ void DinMen::status()
 		std::cout << std::endl;
 		std::cout << it->req;
 	}
+
+	///////////////////////
+	/// Innentol opcionalis
+	///////////////////////
+
+	std::cout << std::endl << std::endl;
+
+	DM_List* ptr = start;
+	while (ptr->next != finish)
+	{
+		if (ptr == start)
+		{
+			for (unsigned int i = 0; i < ptr->next->startPos; i++)
+				std::cout << '0';
+		}
+		else
+		{
+			for (unsigned int i = ptr->startPos + ptr->req->getSize(); i < ptr->next->startPos; i++)
+				std::cout << '0';
+			for (unsigned int z = 0; z < ptr->req->getSize(); z++)
+				std::cout << 'X';
+		}
+		ptr = ptr->next;
+	}
+	
+	// Ha ures a lista
+	if (ptr == start)
+	{
+		for (unsigned int i = 0; i < totalSize; i++)
+			std::cout << '0';
+	}
+
+	// Ha az utolso elemnel vagyunk
+	else
+	{
+		for (unsigned int i = 0; i < ptr->req->getSize(); i++)
+			std::cout << 'X';
+
+		// Ha nem a memoria vegeig van lefoglalva az utolso elem terulete
+		if (totalSize - ptr->req->getSize() - ptr->startPos != 0)
+		{
+			for (unsigned int z = 0; z < totalSize - ptr->req->getSize() - ptr->startPos; z++)
+				std::cout << '0';
+		}
+	}
+
+	///////////////////////
+	/// Itt a vege
+	///////////////////////
 
 	std::cout << "\n\n============================================\n\n";
 }
