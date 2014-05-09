@@ -51,16 +51,28 @@ void DinMen::operator+=(Request* request)
 			{
 				if ((ptr->next->startPos - ptr->startPos - ptr->req->getSize()) >= (request->getSize()))
 				{
-					Match.startPos = (ptr->next->startPos - ptr->startPos - ptr->req->getSize());
+					//Match.startPos = (ptr->next->startPos - ptr->startPos - ptr->req->getSize());
+					Match.startPos = ptr->next->startPos - request->getSize();
 					Match.prevElement = ptr;
 				}
 			}
 			ptr = ptr->next;
 		}
+		// Ha ures a lista
 		if (ptr->req == NULL)
 		{
 			Match.startPos = totalSize - request->getSize();
 			Match.prevElement = start;
+		}
+
+		// Ha van hely az utolso elem es az utolso memoria terulet kozott
+		else
+		{
+			if (totalSize - ptr->startPos - ptr->req->getSize() >= request->getSize())
+			{
+				Match.startPos = totalSize - request->getSize();
+				Match.prevElement = ptr;
+			}
 		}
 
 		// Ha nem talaltunk helyet az elemnek (mert lyukak vannak)
@@ -84,19 +96,9 @@ void DinMen::operator+=(Request* request)
 		}
 	}
 
+	std::cout << "\nAdding new element to DinMen... address: " << request << " size: " << request->getSize() << std::endl;
+
 	status();
-
-	/*
-	DM_List* movingPtr = start;
-	DM_List* newEntity = new DM_List(request);
-
-	while (movingPtr->next != finish) { movingPtr = movingPtr->next; }
-
-	movingPtr->next = newEntity;
-	newEntity->next = finish;
-
-	remainingSize -= newEntity->req->getSize();
-	*/
 }
 
 void DinMen::operator-=(Request* request)
@@ -132,6 +134,8 @@ void DinMen::operator-=(Request* request)
 		throw std::out_of_range("***********************************************\n\nERROR_DinMen: Request is not in DinMen!\n\n***********************************************");
 	}
 
+	std::cout << "\nRemoving element from DinMen... address: " << request << " size: " << request->getSize() << std::endl;
+	
 	status();
 }
 
@@ -148,7 +152,7 @@ void DinMen::status()
 	for (DinMen::iterator it = DinMen::begin(); it != DinMen::end(); ++it)
 	{
 		std::cout << std::endl;
-		std::cout << it->req;
+		std::cout << it->req << " (" << it->req->getSize() << ")";
 	}
 
 	///////////////////////

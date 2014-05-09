@@ -2,7 +2,6 @@
 #include "DinMem.h"
 
 #include <iostream>
-#include <vld.h>
 
 #define REQUEST_BASIC 0
 #define REQUEST_EXCEPTION 0
@@ -145,7 +144,7 @@ int main(int argc, char** argv)
 		d += &rhiba;
 		*/
 
-		
+		/*
 		DinMen d(7);
 		d.status();
 		Request r1(1);
@@ -158,7 +157,42 @@ int main(int argc, char** argv)
 		d -= &r2;
 		Request r4(4);
 		d += &r4;
+		*/
 
+		DinMen d(10);
+		d.status();
+		Request r1(2);
+		d += &r1;
+		Request r2(1);
+		d += &r2;
+		Request r3(4);
+		d += &r3;
+		d -= &r2;
+		Request r4(3);
+		d += &r4;
+		d -= &r3;
+		Request r5(2);
+		d += &r5;
+		d -= &r1;
+		Request r6(1);
+		d += &r6; 
+		Request r7(2);
+		d += &r7;
+		Request r8(1);
+		d += &r8;
+		Request r9(1);
+		d += &r9;
+		d -= &r4;
+		d -= &r5;
+		d -= &r6;
+		d += &r2;
+		d += &r1;
+		d -= &r7;
+		d -= &r8;
+		d -= &r9;
+		d -= &r2;
+		d -= &r1;
+		
 	}
 	catch (const std::out_of_range& e)
 	{
